@@ -1,0 +1,91 @@
+<h3 style="text-align: center;">
+  Nuevo Proyecto</h3>
+<form class="example-form">
+  <mat-form-field class="example-full-width">
+    <textarea matInput placeholder="Nombre del proyecto" (value)="nombreProyecto"></textarea>
+  </mat-form-field>
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field>
+          <input matInput type="number" placeholder="Año" [(value)]="anno" min="2010" max="2020">
+          <mat-error *ngIf="anno<2010 || anno>2020">Ajuste el Valor</mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Estado" [(value)]="estadoProyecto">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let estado of estados" [value]="estado.value">
+              {{estado.mostrar}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Linea de Investigación">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let linea of lineas" [value]="linea.value">
+              {{linea.mostrar}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+
+  <p>
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Objetivo General"></textarea>
+    </mat-form-field>
+    <mat-form-field class="example-full-width">
+      <textarea matInput placeholder="Objetivos Específicos"></textarea>
+    </mat-form-field>
+  </p>
+
+
+  <table class="example-full-width" cellspacing="0">
+    <tr>
+      <td>
+        <mat-form-field>
+          <input matInput type="number" placeholder="Presupuesto Total" [(value)]="anno" min="2010" max="2020">
+          <mat-error *ngIf="anno<2010 || anno>2020">Ajuste el Valor</mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input matInput type="number" placeholder="Presupuesto Primer Año" [(value)]="anno" min="2010" max="2020">
+          <mat-error *ngIf="anno<2010 || anno>2020">Ajuste el Valor</mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field>
+          <input matInput type="number" placeholder="Duración en Meses" [(value)]="anno" min="2010" max="2020">
+          <mat-error *ngIf="anno<2010 || anno>2020">Ajuste el Valor</mat-error>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Estado" [(value)]="estadoProyecto">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let estado of estados" [value]="estado.value">
+              {{estado.mostrar}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <mat-select placeholder="Linea de Investigación">
+            <mat-option>None</mat-option>
+            <mat-option *ngFor="let linea of lineas" [value]="linea.value">
+              {{linea.mostrar}}
+            </mat-option>
+          </mat-select>
+        </mat-form-field>
+      </td>
+    </tr>
+  </table>
+</form>
