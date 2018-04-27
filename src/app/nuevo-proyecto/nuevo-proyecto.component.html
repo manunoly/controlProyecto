@@ -1,74 +1,32 @@
 <h3 style="text-align: center;">
-  Nuevo Proyecto</h3>
-<form class="example-form">
-  <mat-form-field class="example-full-width">
-    <textarea matInput placeholder="Nombre del proyecto" (value)="nombreProyecto"></textarea>
-  </mat-form-field>
+  Nuevo Proyecto {{nombreProyecto}}</h3>
 
-  <table class="example-full-width" cellspacing="0">
-    <tr>
-      <td>
-        <mat-form-field>
-          <input matInput type="number" placeholder="Año" [(value)]="anno" min="2010" max="2020">
-          <mat-error *ngIf="anno<2010 || anno>2020">Ajuste el Valor</mat-error>
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="example-full-width">
-          <mat-select placeholder="Estado" [(value)]="estadoProyecto">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let estado of estados" [value]="estado.value">
-              {{estado.mostrar}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field class="example-full-width">
-          <mat-select placeholder="Linea de Investigación">
-            <mat-option>None</mat-option>
-            <mat-option *ngFor="let linea of lineas" [value]="linea.value">
-              {{linea.mostrar}}
-            </mat-option>
-          </mat-select>
-        </mat-form-field>
-      </td>
-    </tr>
-  </table>
-
+<form [formGroup]="proyectoForm" (ngSubmit)="guardar()" class="example-form">
   <p>
     <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Objetivo General"></textarea>
+      <textarea formControlName="nombre" matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="5" placeholder="Nombre del proyecto"></textarea>
+    </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <textarea formControlName="objetivoGral" matInput matTextareaAutosize matAutosizeMinRows="2" matAutosizeMaxRows="10" placeholder="Objetivo General"></textarea>
     </mat-form-field>
     <mat-form-field class="example-full-width">
-      <textarea matInput placeholder="Objetivos Específicos"></textarea>
+      <textarea formControlName="objetivoEspecificos" matInput matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="10"
+        placeholder="Objetivos Específicos"></textarea>
     </mat-form-field>
   </p>
 
-
   <table class="example-full-width" cellspacing="0">
     <tr>
       <td>
-        <mat-form-field>
-          <input matInput type="number" placeholder="Presupuesto Total" [(value)]="anno" min="2010" max="2020">
-          <mat-error *ngIf="anno<2010 || anno>2020">Ajuste el Valor</mat-error>
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field>
-          <input matInput type="number" placeholder="Presupuesto Primer Año" [(value)]="anno" min="2010" max="2020">
-          <mat-error *ngIf="anno<2010 || anno>2020">Ajuste el Valor</mat-error>
-        </mat-form-field>
-      </td>
-      <td>
-        <mat-form-field>
-          <input matInput type="number" placeholder="Duración en Meses" [(value)]="anno" min="2010" max="2020">
+        <mat-form-field class="example-full-width">
+          <input formControlName="anno" matInput type="number" placeholder="Año" min="2010" max="2020">
           <mat-error *ngIf="anno<2010 || anno>2020">Ajuste el Valor</mat-error>
         </mat-form-field>
       </td>
       <td>
         <mat-form-field class="example-full-width">
-          <mat-select placeholder="Estado" [(value)]="estadoProyecto">
+          <mat-select formControlName="estado" placeholder="Estado">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let estado of estados" [value]="estado.value">
               {{estado.mostrar}}
@@ -78,7 +36,7 @@
       </td>
       <td>
         <mat-form-field class="example-full-width">
-          <mat-select placeholder="Linea de Investigación">
+          <mat-select formControlName="linea" placeholder="Linea de Investigación">
             <mat-option>None</mat-option>
             <mat-option *ngFor="let linea of lineas" [value]="linea.value">
               {{linea.mostrar}}
@@ -87,5 +45,59 @@
         </mat-form-field>
       </td>
     </tr>
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput type="number" formControlName="duracion" placeholder="Duración en Meses">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <span matPrefix>$ &nbsp;</span>
+          <input matInput formControlName="presupuesto" type="number" placeholder="Presupuesto Total">
+        </mat-form-field>
+      </td>
+      <td>
+        <mat-form-field class="example-full-width">
+          <span matPrefix>$ &nbsp;</span>
+          <input matInput formControlName="primerAnno" type="number" placeholder="Primer Año">
+        </mat-form-field>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <mat-form-field class="example-full-width">
+          <input matInput placeholder="Zona tentativa de influencia" formControlName="region">
+        </mat-form-field>
+      </td>
+      <!-- <td>
+          <mat-form-field class="example-full-width">
+            <mat-select formControlName="region" placeholder="Zona tentativa de influencia" multiple>
+              <mat-option *ngFor="let region of regiones" [value]="region.value">{{region.mostrar}}</mat-option>
+            </mat-select>
+          </mat-form-field>
+        </td>
+        <td>
+        <mat-form-field class="demo-chip-list">
+          <mat-chip-list #chipList>
+            <mat-chip *ngFor="let fruit of fruits" [selectable]="selectable" [removable]="removable" (remove)="remove(fruit)">
+              {{fruit.name}}
+              <a matChipRemove *ngIf="removable">X</a>
+            </mat-chip>
+            <input placeholder="New fruit..." [matChipInputFor]="chipList" [matChipInputSeparatorKeyCodes]="separatorKeysCodes" [matChipInputAddOnBlur]="addOnBlur"
+              (matChipInputTokenEnd)="add($event)" />
+          </mat-chip-list>
+        </mat-form-field>
+      </td> -->
+    </tr>
   </table>
+  <p>
+    <mat-form-field class="example-full-width">
+      <textarea formControlName="productos" matInput matTextareaAutosize matAutosizeMinRows="3" matAutosizeMaxRows="10" placeholder="Productos del Proyecto"></textarea>
+    </mat-form-field>
+  </p>
+
+  <div class="button-row" style="text-align: center">
+    <button type="submit" [disabled]="!proyectoForm.valid" mat-raised-button color="primary">Guardar</button>
+  </div>
 </form>

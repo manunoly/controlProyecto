@@ -2,6 +2,8 @@ import { BrowserModule } from "@angular/platform-browser";
 import { NgModule } from "@angular/core";
 
 import { Routes, RouterModule } from "@angular/router";
+import { ReactiveFormsModule } from '@angular/forms';
+import {MatChipsModule} from '@angular/material/chips';
 
 import { BrowserAnimationsModule } from "@angular/platform-browser/animations";
 
@@ -62,6 +64,8 @@ const appRoutes: Routes = [
   ],
   imports: [
     BrowserModule,
+    ReactiveFormsModule,
+    MatChipsModule,
     BrowserAnimationsModule,
     MatButtonModule,
     MatCheckboxModule,
